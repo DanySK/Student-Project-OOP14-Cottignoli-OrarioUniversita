@@ -9,18 +9,16 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model.ISubject;
-
-public class RemoveSubjectForm extends AbstractForm {
+public class ListObjectForm extends AbstractForm {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final JComboBox<ISubject> sub = new JComboBox<>();
-	private final JLabel lsub = new JLabel("Subject");
+	private final JComboBox<Object> sub = new JComboBox<>();
+	private final JLabel lsub = new JLabel();
 	
-	protected RemoveSubjectForm(final Frame v) {
+	protected ListObjectForm(final Frame v) {
 		super(v);
 		final JPanel mainPanel = new JPanel(new GridLayout(1, 2));
 		mainPanel.add(sub);
@@ -34,15 +32,16 @@ public class RemoveSubjectForm extends AbstractForm {
 		sub.setSelectedIndex(0);
 	}
 	
-	public void setList(final Set<ISubject> s) {
+	public void setList(final Set<? extends Object> s, final String objectName) {
 		sub.removeAllItems();
-		for (final ISubject su : s) {
-			sub.addItem(su);
+		lsub.setText(objectName);
+		for (final Object obj : s) {
+			sub.addItem(obj);
 		}
 	}
 	
-	public ISubject getRemovedSubject() {
-		return (ISubject) sub.getSelectedItem();
+	public Object getSelectedObject() {
+		return sub.getSelectedItem();
 	}
 
 }

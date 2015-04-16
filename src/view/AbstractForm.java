@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
-public abstract class AbstractForm extends JDialog{
+public abstract class AbstractForm extends JDialog {
 
 	/**
 	 * 
@@ -59,5 +59,6 @@ public abstract class AbstractForm extends JDialog{
 	private void quit() {
 		this.setVisible(false);
 		mainFrame.setEnabled(true);
+		mainFrame.setVisible(true);
 	}
 }

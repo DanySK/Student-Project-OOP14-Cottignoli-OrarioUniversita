@@ -14,6 +14,7 @@ import javax.swing.SpinnerNumberModel;
 import model.Classrooms;
 import model.DailyTime;
 import model.Days;
+import model.IDailyTime;
 import model.ISubject;
 
 public class AddForm extends AbstractForm {
@@ -26,11 +27,14 @@ public class AddForm extends AbstractForm {
 	private final JComboBox<ISubject> sub = new JComboBox<>();
 	private final JComboBox<Days> days = new JComboBox<>(Days.values());
 	private final JComboBox<Classrooms> cls = new JComboBox<>(Classrooms.values());
-	private final JComboBox<String> hour = new JComboBox<>(View.PROPS);
+	private final JComboBox<String> hour = new JComboBox<>();
 	private final JSpinner spin = new JSpinner(new SpinnerNumberModel(1, 1, DailyTime.HOURS, 1));
 	
 	public AddForm(final Frame v) {
 		super(v);
+		for (int i = IDailyTime.FIRST_HOUR; i < (IDailyTime.FIRST_HOUR + IDailyTime.HOURS); i++) {
+			hour.addItem(i + "-" + (i + 1));
+		}
 		final JPanel mainPanel = new JPanel(new GridLayout(5, 2));
 		mainPanel.add(sub);
 		mainPanel.add(new JLabel("Subject"));
@@ -48,7 +52,7 @@ public class AddForm extends AbstractForm {
 
 	@Override
 	protected void init() {
-		sub.setSelectedIndex(-1);
+		sub.setSelectedIndex(0);
 		days.setSelectedIndex(0);
 		cls.setSelectedIndex(0);
 		hour.setSelectedIndex(0);

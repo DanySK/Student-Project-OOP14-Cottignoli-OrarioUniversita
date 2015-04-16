@@ -13,7 +13,7 @@ public class Subject implements ISubject {
 	
 	public Subject(final String sub, final String teach, final SubjectType type) {
 		if (sub == null || teach == null || type == null) {
-			throw new NullPointerException();
+			throw new IllegalArgumentException("The values can't be null!");
 		}
 		subName = sub;
 		teachName = teach;
@@ -80,8 +80,7 @@ public class Subject implements ISubject {
 
 	@Override
 	public String toString() {
-		return /*"SubjectImpl [subName=" + subName + ", teachName=" + teachName
-				+ ", subType=" + subType + "]"*/ subName + "  " + teachName + "  " + subType;
+		return subName + " (" + subType + ") \n" + teachName;
 	}
 	
 	

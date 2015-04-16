@@ -13,20 +13,24 @@ import javax.swing.SpinnerNumberModel;
 import model.Classrooms;
 import model.DailyTime;
 import model.Days;
+import model.IDailyTime;
 
-public class RemoveForm extends AbstractForm{
+public class RemoveForm extends AbstractForm {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private final JComboBox<Days> days = new JComboBox<>(Days.values());
-	private final JComboBox<String> hour = new JComboBox<>(View.PROPS);
+	private final JComboBox<String> hour = new JComboBox<>();
 	private final JComboBox<Classrooms> cls = new JComboBox<>(Classrooms.values());
 	private final JSpinner spin = new JSpinner(new SpinnerNumberModel(1, 1, DailyTime.HOURS, 1));
 	
 	protected RemoveForm(final Frame v) {
 		super(v);
+		for (int i = IDailyTime.FIRST_HOUR; i < (IDailyTime.FIRST_HOUR + IDailyTime.HOURS); i++) {
+			hour.addItem(i + "-" + (i + 1));
+		}
 		final JPanel mainPanel = new JPanel(new GridLayout(4, 2));
 		mainPanel.add(days);
 		mainPanel.add(new JLabel("Day"));

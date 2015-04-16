@@ -9,18 +9,33 @@ public interface IModel extends java.io.Serializable {
 	int SEC_SEM = 1;
 	
 	//aggiunge una materia nell'orario di una aula in un determinato giorno del semestre scelto
-	void add(final int sem, final Days d, final ISubject sub, final Classrooms room, final int hour, final int n);
+	void add(int sem, Days d, ISubject sub, Classrooms room, int hour, int n) throws WrongInputException;
 			
 	//rimuove qualsiasi materia nell'orario di una aula nelle ore selezionate di un determinato giorno del semestre scelto
-	void remove(final int sem, final Days d, final Classrooms room, final int hour, final int n);
+	void remove(int sem, Days d, Classrooms room, int hour, int n) throws WrongInputException;
 	
-	void addSubject(final String sub, final String teach, final SubjectType type);
+	void addSubject(String sub, String teach, SubjectType type);
 	
-	void removeSubject(final ISubject sub);
+	void removeSubject(ISubject sub);
 		
-	Optional<ISubject> getSubject(final int sem, final Days d, final Classrooms room, final int hour);
+	Optional<ISubject> getSubject(int sem, Days d, Classrooms room, int hour) throws WrongInputException;
 	
 	Set<ISubject> getSubjects();
 	
 	void setSubjects(Set<ISubject> set);
+	
+	Classrooms whereTeaching(String teach, int hour, Days d, int sem) throws WrongInputException;
+	
+	Classrooms wherePerforming(ISubject sub, int hour, Days d, int sem) throws WrongInputException;
+	
+	Set<String> getTeachers();
+	
+	IMemento createMemento();
+	
+	void setMemento(IMemento mem);
+	
+	interface IMemento {
+		
+		Object getState();
+	}
 }

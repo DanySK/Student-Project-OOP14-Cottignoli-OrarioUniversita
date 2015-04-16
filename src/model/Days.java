@@ -1,28 +1,31 @@
 package model;
 
-public enum Days{
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+
+public enum Days {
 	
-	MONDAY(0, "Monday"), 
-	TUESDAY(1, "Tuesday"), 
-	WEDNESDEY(2, "Wednesday"), 
-	THURSDAY(3, "Thursday"), 
-	FRIDAY(4, "Friday");
+	MONDAY("Monday"), 
+	TUESDAY("Tuesday"), 
+	WEDNESDEY("Wednesday"), 
+	THURSDAY("Thursday"), 
+	FRIDAY("Friday");
 	
 	public static final int N_DAYS = 5;
 	
-	private final int ordinal;
 	private final String name;
 	
-	private Days(final int o, final String s){
-		ordinal = o;
+	private Days(final String s) {
 		name = s;
 	}
 	
-	public int getOrdinal(){
-		return ordinal;
+	public String getName() {
+		return name;
 	}
 	
-	public String getName(){
-		return name;
+	public static Set<Days> getDaysValues() {
+		return new HashSet<>(Arrays.asList(Days.values()));
 	}
 }

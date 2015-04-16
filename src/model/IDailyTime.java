@@ -1,7 +1,6 @@
 package model;
 
 import java.util.Optional;
-import java.util.Set;
 
 public interface IDailyTime extends java.io.Serializable {
 
@@ -9,15 +8,13 @@ public interface IDailyTime extends java.io.Serializable {
 	int FIRST_HOUR = 9;		//ora inizio lezioni
 	
 	//aggiunge una materia, se parte o tutte le ore "selezionate" sono occupate tira un errore
-	void add(final ISubject less, final int hour, final int n);
+	void add(ISubject less, int hour, int n) throws WrongInputException;
 	
 	//rimuove qualsiasi materia nelle ore selezionate
-	void remove(final int hour, final int n);
+	void remove(int hour, int n) throws WrongInputException;
 	
 	//restituisce la materia ad una determinata ora
-	Optional<ISubject> getSubject(final int hour);
+	Optional<ISubject> getSubject(int hour) throws WrongInputException;
 	
-	//restituisce le materie che vi sono in un determinato arco di tempo
-	Set<ISubject> getSubjects(final int hour, final int n);
-	
+	IDailyTime copy();
 }

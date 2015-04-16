@@ -1,5 +1,9 @@
 package model;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 public enum Classrooms {
 	MAGNA("Aula magna", 240),
 	A("Aula A", 98),
@@ -27,4 +31,7 @@ public enum Classrooms {
 		return nSeats;
 	}
 	
+	public static Set<Classrooms> getClassroomsValues() {
+		return new HashSet<>(Arrays.asList(Classrooms.values()));
+	}
 }

@@ -7,15 +7,22 @@ import model.Days;
 import model.ISubject;
 import model.Subject;
 import model.SubjectType;
+import model.ViewsType;
 import view.IView;
 
 public interface IController {
 	
 	void addView(final IView v);
 	
+	void commandNew();
+	
 	void commandAddSubject(final String sub, final String teach, final SubjectType type);
 	
 	void commandRemoveSubject(final ISubject sub);
+	
+	void commandExportSubjectList(final String fileName);
+	
+	void commandImportSubjectList(final String fileName);
 	
 	void commandAdd(final int sem, final Days d, final ISubject sub, final Classrooms room, final int hour, final int n);
 	
@@ -25,13 +32,13 @@ public interface IController {
 	
 	void commandLoad(final String fileName);
 	
-	Set<ISubject> commandGetSubjectsList();
+	Set<ISubject> getSubjectsList();
 	
-	void commandSetSubjectList();
+	Set<String> getTeachersList();
 	
-	void commandBack();
+	void commandUndo();
 	
-	void commandNext();
+	void commandRedo();
 	
-	void test();
+	void setViews(Object ob); ///provaaaaaaaaa
 }

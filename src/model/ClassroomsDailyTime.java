@@ -3,9 +3,8 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
-public class ClassroomsDailyTime implements IClassroomsDailyTime{
+public class ClassroomsDailyTime implements IClassroomsDailyTime {
 
 	/**
 	 * 
@@ -19,34 +18,62 @@ public class ClassroomsDailyTime implements IClassroomsDailyTime{
 			m.put(c, new DailyTime());
 		}
 	}
+	
+	public ClassroomsDailyTime(IClassroomsDailyTime cdt) {
+		for (final Classrooms c : Classrooms.values()) {
+			m.put(c, cdt.getDailyTime(c));
+		}
+	}
 
 	@Override
-	public void add(final ISubject sub, final Classrooms room, final int hour, final int n) {
-		checkNull(room);
-		for (final Classrooms s : m.keySet()) {
-			if (m.get(s).getSubjects(hour, n).contains(sub)) {
-				throw new IllegalArgumentException("This lesson already exist at this time in another classroom");
-			}
-		}
+	public void add(final ISubject sub, final Classrooms room, final int hour, final int n) throws WrongInputException {
+		checkRoom(room);
 		m.get(room).add(sub, hour, n);
 	}
 
 	@Override
-	public void remove(final Classrooms room, final int hour, final int n) {
-		checkNull(room);
+	public void remove(final Classrooms room, final int hour, final int n) throws WrongInputException {
+		checkRoom(room);
 		m.get(room).remove(hour, n);
 	}
 
 	@Override
-	public Optional<ISubject> getSubject(final Classrooms room, final int hour) {
-		checkNull(room);
+	public Optional<ISubject> getSubject(final Classrooms room, final int hour) throws WrongInputException {
+		checkRoom(room);
 		return m.get(room).getSubject(hour);
 	}
-
+	
 	@Override
-	public Set<ISubject> getSubjects(final Classrooms room, final int hour, final int n) {
-		checkNull(room);
-		return m.get(room).getSubjects(hour, n);
+	public IDailyTime getDailyTime(final Classrooms room) {
+		checkRoom(room);
+		return  m.get(room).copy();
+	}
+	 
+	@Override
+	public IClassroomsDailyTime copy() {
+		return new ClassroomsDailyTime(this);
+	}
+	
+	//provaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..si può migliorare restituendo un set<classrooms>
+	@Override
+	public Classrooms whereTeaching(final String teach, final int hour) throws WrongInputException {
+		for (final Classrooms room : Classrooms.values()) {
+			if (m.get(room).getSubject(hour).isPresent() && m.get(room).getSubject(hour).get().getTeachName().equals(teach)) {
+				return room;
+			}
+		}
+		return null;
+	}
+	
+	//provaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..si può migliorare restituendo un set<classrooms>
+	@Override
+	public Classrooms wherePerforming(final ISubject sub, final int hour) throws WrongInputException {
+		for (final Classrooms room : Classrooms.values()) {
+			if (m.get(room).getSubject(hour).isPresent() && m.get(room).getSubject(hour).get().equals(sub)) {
+				return room;
+			}
+		}
+		return null;
 	}
 	
 	@Override
@@ -84,9 +111,9 @@ public class ClassroomsDailyTime implements IClassroomsDailyTime{
 		return "ClassroomsDailyTimeImpl [m=" + m + "]";
 	}
 
-	private void checkNull(final Object o) {
-		if (o == null) {
-			throw new NullPointerException();
+	private void checkRoom(final Classrooms room) {
+		if (room == null) {
+			throw new IllegalArgumentException("The classroom can't be null!");
 		}
 	}
 }
