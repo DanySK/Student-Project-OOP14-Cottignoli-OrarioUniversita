@@ -3,7 +3,16 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
+/**
+ * 
+ * Implementazione dell'interfaccia {@link IWeeklyTime} tramite l'utilizzo di una Map che come chiave ha i valori di 
+ * {@link Days#values()} ed associato ad ognuna un {@link IClassroomsDailyTime}.
+ * 
+ * @author Lorenzo Cottignoli
+ * 
+ */
 public class WeeklyTime implements IWeeklyTime {
 
 	/**
@@ -13,32 +22,44 @@ public class WeeklyTime implements IWeeklyTime {
 	
 	private final Map<Days, IClassroomsDailyTime> week = new HashMap<>();
 	
+	/**
+	 * Costruttore che crea una struttura vuota.
+	 */
 	public WeeklyTime() {
 		for (final Days d : Days.values()) {
 			week.put(d, new ClassroomsDailyTime());
 		}
 	}
 	
+	/**
+	 * Costruttore che crea una nuova struttura copiando quella passata come parametro.
+	 * 
+	 * @param wt struttura da copiare.
+	 * @throws IllegalArgumentException se wt è null.
+	 */
 	public WeeklyTime(final IWeeklyTime wt) {
+		if (wt == null) {
+			throw new IllegalArgumentException("the parameter 'wt' can't be null!");
+		}
 		for (final Days d : Days.values()) {
 			week.put(d, wt.getClassroomDailyTime(d));
 		}
 	}
 	
 	@Override
-	public void add(final Days d, final ISubject sub, final Classrooms room, final int hour, final int n) throws WrongInputException {
+	public void add(final ISubject sub, final Days d, final Classrooms room, final int hour, final int n) {
 		checkDay(d);
 		week.get(d).add(sub, room, hour, n);
 	}
 
 	@Override
-	public void remove(final Days d, final Classrooms room, final int hour, final int n) throws WrongInputException {
+	public void remove(final Days d, final Classrooms room, final int hour, final int n) {
 		checkDay(d);
 		week.get(d).remove(room, hour, n);
 	}
 
 	@Override
-	public Optional<ISubject> getSubject(final Days d, final Classrooms room, final int hour) throws WrongInputException {
+	public Optional<ISubject> getSubject(final Days d, final Classrooms room, final int hour) {
 		checkDay(d);
 		return week.get(d).getSubject(room, hour);
 	}
@@ -54,20 +75,24 @@ public class WeeklyTime implements IWeeklyTime {
 		return new WeeklyTime(this);
 	}
 	
-	//provaaaaaaaaaaaaaaa
 	@Override
-	public Classrooms whereTeaching(final String teach, final int hour, final Days d) throws WrongInputException {
+	public Set<Classrooms> whereTeaching(final String teach, final Days d, final int hour) {
 		checkDay(d);
 		return week.get(d).whereTeaching(teach, hour);
 	}
 	
-	//provaaaaaaaaaaaaaa
 	@Override
-	public Classrooms wherePerforming(final ISubject sub, final int hour, final Days d) throws WrongInputException {
+	public Set<Classrooms> wherePerforming(final ISubject sub, final Days d, final int hour) {
 		checkDay(d);
 		return week.get(d).wherePerforming(sub, hour);
 	}
 
+	/**
+	 * Metodo per controllare se un giorno è uguale a null.
+	 * 
+	 * @param d Giorno da controllare.
+	 * @throws IllegalArgumentException se d è null.
+	 */
 	private void checkDay(final Days d) {
 		if (d == null) {
 			throw new IllegalArgumentException("The day can't be null!");

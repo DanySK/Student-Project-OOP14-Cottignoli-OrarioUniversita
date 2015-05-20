@@ -1,9 +1,18 @@
 package model;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
+/**
+ * Implementazione dell'interfaccia {@link IClassroomsDailyTime} tramite l'utilizzo di una Map che come chiave ha i valori di 
+ * {@link Classrooms#values()} ed associato ad ognuna un {@link IDailyTime}.
+ * 
+ * @author Lorenzo Cottignoli
+ *
+ */
 public class ClassroomsDailyTime implements IClassroomsDailyTime {
 
 	/**
@@ -13,32 +22,51 @@ public class ClassroomsDailyTime implements IClassroomsDailyTime {
 	
 	private final Map<Classrooms, IDailyTime> m = new HashMap<>();
 	
+	/**
+	 * Crea un nuovo orario giornaliero con tutte le ore libere per ogni aula.
+	 */
 	public ClassroomsDailyTime() {
 		for (final Classrooms c : Classrooms.values()) {
 			m.put(c, new DailyTime());
 		}
 	}
 	
-	public ClassroomsDailyTime(IClassroomsDailyTime cdt) {
+	/**
+	 * Crea un nuovo orario giornaliero per ogni aula copiando quello passato come parametro.
+	 * 
+	 * @param cdt Orario giornaliero di tutte le aulee da copiare.
+	 * @throws IllegalArgumentException se il parametro cdt è null.
+	 */
+	public ClassroomsDailyTime(final IClassroomsDailyTime cdt) {
+		if (cdt == null) {
+			throw new IllegalArgumentException("the parameter 'cdt' can't be null!");
+		}
 		for (final Classrooms c : Classrooms.values()) {
 			m.put(c, cdt.getDailyTime(c));
 		}
 	}
 
 	@Override
-	public void add(final ISubject sub, final Classrooms room, final int hour, final int n) throws WrongInputException {
+	public void add(final ISubject sub, final Classrooms room, final int hour, final int n) {
 		checkRoom(room);
+		if (!whereTeaching(sub.getTeachName(), hour).isEmpty()) {
+			for (final Classrooms cls : whereTeaching(sub.getTeachName(), hour)) {
+				if (!getSubject(cls, hour).get().equals(sub)) {
+					throw new IllegalArgumentException(sub.getTeachName() + "is already teaching another subject in this hour!");
+				}
+			}
+		}
 		m.get(room).add(sub, hour, n);
 	}
 
 	@Override
-	public void remove(final Classrooms room, final int hour, final int n) throws WrongInputException {
+	public void remove(final Classrooms room, final int hour, final int n) {
 		checkRoom(room);
 		m.get(room).remove(hour, n);
 	}
 
 	@Override
-	public Optional<ISubject> getSubject(final Classrooms room, final int hour) throws WrongInputException {
+	public Optional<ISubject> getSubject(final Classrooms room, final int hour) {
 		checkRoom(room);
 		return m.get(room).getSubject(hour);
 	}
@@ -54,26 +82,26 @@ public class ClassroomsDailyTime implements IClassroomsDailyTime {
 		return new ClassroomsDailyTime(this);
 	}
 	
-	//provaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..si può migliorare restituendo un set<classrooms>
 	@Override
-	public Classrooms whereTeaching(final String teach, final int hour) throws WrongInputException {
+	public Set<Classrooms> whereTeaching(final String teach, final int hour) {
+		final Set<Classrooms> set = new HashSet<>();
 		for (final Classrooms room : Classrooms.values()) {
 			if (m.get(room).getSubject(hour).isPresent() && m.get(room).getSubject(hour).get().getTeachName().equals(teach)) {
-				return room;
+				set.add(room);
 			}
 		}
-		return null;
+		return set;
 	}
 	
-	//provaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..si può migliorare restituendo un set<classrooms>
 	@Override
-	public Classrooms wherePerforming(final ISubject sub, final int hour) throws WrongInputException {
+	public Set<Classrooms> wherePerforming(final ISubject sub, final int hour) {
+		final Set<Classrooms> set = new HashSet<>();
 		for (final Classrooms room : Classrooms.values()) {
 			if (m.get(room).getSubject(hour).isPresent() && m.get(room).getSubject(hour).get().equals(sub)) {
-				return room;
+				set.add(room);
 			}
 		}
-		return null;
+		return set;
 	}
 	
 	@Override
@@ -108,9 +136,15 @@ public class ClassroomsDailyTime implements IClassroomsDailyTime {
 
 	@Override
 	public String toString() {
-		return "ClassroomsDailyTimeImpl [m=" + m + "]";
+		return "ClassroomsDailyTime [m=" + m + "]";
 	}
 
+	/**
+	 * Metodo per controllare che l'aula non sia null.
+	 * 
+	 * @param room Aula da controllare.
+	 * @throws IllegalArgumentException se room è null.
+	 */
 	private void checkRoom(final Classrooms room) {
 		if (room == null) {
 			throw new IllegalArgumentException("The classroom can't be null!");

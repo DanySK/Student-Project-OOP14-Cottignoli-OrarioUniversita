@@ -15,6 +15,12 @@ import model.DailyTime;
 import model.Days;
 import model.IDailyTime;
 
+/**
+ * Form per la rimozione di una o più ore dall'orario.
+ * 
+ * @author Lorenzo Cottignoli
+ *
+ */
 public class RemoveForm extends AbstractForm {
 
 	/**
@@ -26,7 +32,11 @@ public class RemoveForm extends AbstractForm {
 	private final JComboBox<Classrooms> cls = new JComboBox<>(Classrooms.values());
 	private final JSpinner spin = new JSpinner(new SpinnerNumberModel(1, 1, DailyTime.HOURS, 1));
 	
-	protected RemoveForm(final Frame v) {
+	/**
+	 * 
+	 * @param v Frame principale.
+	 */
+	public RemoveForm(final Frame v) {
 		super(v);
 		for (int i = IDailyTime.FIRST_HOUR; i < (IDailyTime.FIRST_HOUR + IDailyTime.HOURS); i++) {
 			hour.addItem(i + "-" + (i + 1));
@@ -43,27 +53,50 @@ public class RemoveForm extends AbstractForm {
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 		pack();
 	}
-
+	
 	@Override
-	protected void init() {
-		days.setSelectedIndex(0);
-		hour.setSelectedIndex(0);
-		cls.setSelectedIndex(0);
-		spin.setValue(1);
+	public void setVisible(final boolean b) {
+		super.setVisible(b);
+		if (b) {
+			days.setSelectedIndex(0);
+			hour.setSelectedIndex(0);
+			cls.setSelectedIndex(0);
+			spin.setValue(1);
+		}
 	}
 	
+	/**
+	 * Metodo per recuperare il giorno in cui eliminare le materie.
+	 * 
+	 * @return Giorno selezionato.
+	 */
 	public Days getDay() {
 		return (Days) days.getSelectedItem();
 	}
 	
+	/**
+	 * Metodo per recuperare l'ora di inizio da cui iniziare ad eliminare.
+	 * 
+	 * @return Ora selezionata.
+	 */
 	public int getHour() {
 		return DailyTime.FIRST_HOUR + hour.getSelectedIndex();
 	}
 	
+	/**
+	 * Metodo per recuperare l'aula in cui eliminare le materie.
+	 * 
+	 * @return Aula selezionata.
+	 */
 	public Classrooms getClassroom() {
 		return (Classrooms) cls.getSelectedItem();
 	}
 	
+	/**
+	 * Metodo per recuperare il numero di ore consecutive da eliminare.
+	 * 
+	 * @return Numero dello ore consecutive.
+	 */
 	public int getNumberHours() {
 		return (int) spin.getValue();
 	}

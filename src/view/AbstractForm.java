@@ -3,10 +3,17 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Frame;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+/**
+ * Abstract Form contenente un tasto ok e cancel.
+ * 
+ * @author Lorenzo Cottignoli
+ *
+ */
 public abstract class AbstractForm extends JDialog {
 
 	/**
@@ -20,45 +27,50 @@ public abstract class AbstractForm extends JDialog {
 	
 	private boolean okState;
 	
+	/**
+	 * 
+	 * @param v Frame principale.
+	 */
 	protected AbstractForm(final Frame v) {
 		super(v);
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		mainFrame = v;
-		setLocationByPlatform(true);
 		setResizable(false);
 		okState = false;
 		getContentPane().setLayout(new BorderLayout());
 		final JPanel p = new JPanel(new FlowLayout());
 		getContentPane().add(p, BorderLayout.SOUTH);
 		p.add(bOk);
-		bOk.setActionCommand("OK");
 		bOk.addActionListener(e -> {
 			okState = true;
-			quit();
+			this.setVisible(false);
 		});
 		p.add(bCanc);
-		bCanc.setActionCommand("CANCEL");
 		bCanc.addActionListener(e -> {
 			okState = false;
-			quit();
+			this.setVisible(false);
 		});
-		pack();
 	}
 	
+	/**
+	 * Metodo che informa se è stato premuto il tasto ok o meno.
+	 * 
+	 * @return true se è stato premuto ok, altrimenti false.
+	 */
 	public boolean isOk() {
 		return okState;
 	}
 	
-	public void reinit() {
-		okState = false;
-		init();
-	}
-	
-	protected abstract void init();
-
-	private void quit() {
-		this.setVisible(false);
-		mainFrame.setEnabled(true);
-		mainFrame.setVisible(true);
+	/**
+	 * Aggiunge al metodo standard la collocazione del form al centro del form mainFrame.
+	 */
+	@Override
+	public void setVisible(final boolean b) {
+		super.setVisible(b);
+		if (b) {
+			okState = false;
+			final int x = mainFrame.getX() + mainFrame.getWidth() / 2 - this.getWidth() / 2;
+			final int y = mainFrame.getY() + mainFrame.getHeight() / 2 - this.getHeight() / 2;	
+			setLocation(x, y);
+		}
 	}
 }

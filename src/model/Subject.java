@@ -1,5 +1,10 @@
 package model;
-
+/**
+ * Implementazione dell'interfaccia {@link ISubject}.
+ * 
+ * @author Lorenzo Cottignoli
+ *
+ */
 public class Subject implements ISubject {
 
 	/**
@@ -11,6 +16,14 @@ public class Subject implements ISubject {
 	private final String teachName;  
 	private final SubjectType subType;   
 	
+	/**
+	 * Crea una materia con i parametri passati.
+	 * 
+	 * @param sub Nome della materia.
+	 * @param teach Nome del professore che tiene questa lezione.
+	 * @param type Tipologia di materia.
+	 * @throws IllegalArgumentException se uno o più parametri sono null.
+	 */
 	public Subject(final String sub, final String teach, final SubjectType type) {
 		if (sub == null || teach == null || type == null) {
 			throw new IllegalArgumentException("The values can't be null!");

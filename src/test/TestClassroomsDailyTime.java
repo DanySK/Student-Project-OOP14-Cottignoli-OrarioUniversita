@@ -1,44 +1,110 @@
 package test;
 
-import static org.junit.Assert.*;
-import static model.SubjectType.*;
+import static model.Classrooms.A;
+import static model.Classrooms.B;
+import static model.Classrooms.MAGNA;
+import static model.Classrooms.VELA;
+import static model.SubjectType.LT1;
+import static model.SubjectType.LT3;
+import static org.junit.Assert.fail;
 import model.Classrooms;
 import model.ClassroomsDailyTime;
 import model.IClassroomsDailyTime;
+import model.ISubject;
 import model.Subject;
-import model.WrongInputException;
 
 import org.junit.Test;
 
+/**
+ * Classe per testare il corretto funzionamento della classe {@link ClassroomsDailyTime}.
+ * 
+ * @author Lorenzo Cottignoli
+ *
+ */
 public class TestClassroomsDailyTime {
 
+	private static final String S = "Success!";
+	
+	/**
+	 * Test per controllare che la classe ClassroomsDailyTime segui il funzionamento indicato nei metodi dell'interfaccia 
+	 * {@link IClassroomsDailyTime}.
+	 */
 	@Test
 	public void test() {
 		final IClassroomsDailyTime c = new ClassroomsDailyTime();
 		try {
-			c.add(new Subject("OOP", "viroli", LT1), Classrooms.MAGNA, 10, 2);
-			c.add(new Subject("SO", "salomoni", LT1), Classrooms.VELA, 10, 2);
-			c.add(new Subject("SO", "salomoni", LT1), Classrooms.MAGNA, 13, 2);
-			c.remove(Classrooms.MAGNA, 13, 2);
-		} catch (WrongInputException e) {
+			c.add(createSubOOP(), MAGNA, 10, 2);
+			c.add(createSubOOP(), A, 10, 2);
+			c.add(createSubSO(), VELA, 10, 2);
+			c.add(createSubSO(), MAGNA, 13, 2);
+			c.remove(MAGNA, 13, 2);
+		} catch (IllegalArgumentException e) {
 			fail("this sequence of instructions is right!");
 		}
 		
+		IClassroomsDailyTime d;
 		try {
-			c.add(new Subject("OOP", "viroli", LT1), null, 15, 2);
+			d = new ClassroomsDailyTime(null);
+			fail("can't accept null");
+		} catch (IllegalArgumentException e) {
+			System.out.println(S);
+		}
+		
+		d = new ClassroomsDailyTime(c);
+		if (d.equals(c)) {
+			System.out.println(S);
+		}
+		
+		for (final Classrooms cls : c.wherePerforming(createSubOOP(), 11)) {
+			if (!(cls.equals(MAGNA) || cls.equals(A))) {
+				fail("The only classrooms busied by that subject are Aula Magna and Aula A");
+			}
+		}
+		
+		if (!c.wherePerforming(null, 11).isEmpty()) {
+			fail("if sub == null the set must be empty!");
+		}
+		
+		for (final Classrooms cls : c.whereTeaching(createSubOOP().getTeachName(), 11)) {
+			if (!(cls.equals(MAGNA) || cls.equals(A))) {
+				fail("The only classrooms busied by that teacher are Aula Magna and Aula A");
+			}
+		}
+		
+		if (!c.whereTeaching(null, 11).isEmpty()) {
+			fail("if teach == null the set must be empty!");
+		}
+		
+		try {
+			c.add(new Subject("anotherSubject", "viroli", LT3), B, 10, 2);
+			fail("viroli already teaching OOP at that time!");
+		} catch (IllegalArgumentException e) {
+			System.out.println(S);
+		}
+		
+		try {
+			c.add(createSubOOP(), null, 15, 2);
 			fail("null can't be accepted");
-		} catch (WrongInputException e) {
-			fail("Wrong exception catched");
-		} catch (IllegalArgumentException e) {}
+		} catch (IllegalArgumentException e) { 
+			System.out.println(S);
+		}
 			
 		
 		try {
 			c.remove(null, 10, 2);
 			fail("null can't be accepted");
-		} catch (WrongInputException e) {
-			fail("Wrong exception catched");
-		} catch (IllegalArgumentException e) {}
+		} catch (IllegalArgumentException e) {
+			System.out.println(S);
+		}
 		
 		
+	}
+	
+	private ISubject createSubOOP() {
+		return new Subject("OOP", "viroli", LT1);
+	}
+	
+	private ISubject createSubSO() {
+		return new Subject("SO", "salomoni", LT1);
 	}
 }

@@ -4,33 +4,87 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Enumerator class utilizzata per rappresentare le aule disponibili nella facoltà di scienze e tecnologie informatiche di Cesena.
+ * 
+ * @author Lorenzo Cottignoli
+ *
+ */
 public enum Classrooms {
-	MAGNA("Aula magna", 240),
-	A("Aula A", 98),
-	B("Aula B", 118),
-	C("Aula C", 60),
-	D("Aula D", 30),
-	E("Aula E", 37),
-	VELA("Laboratorio vela", 80),
-	LAB2("Laboratorio 2", 60),
-	LAB3("Laboratorio 3", 80);
+	
+	/**
+	 * Aula Magna.
+	 */
+	MAGNA("Aula magna"),
+	
+	/**
+	 * Aula A.
+	 */
+	A("Aula A"),
+	
+	/**
+	 * Aula B.
+	 */
+	B("Aula B"),
+	
+	/**
+	 * Aula C.
+	 */
+	C("Aula C"),
+	
+	/**
+	 * Aula D.
+	 */
+	D("Aula D"),
+	
+	/**
+	 * Aula E.
+	 */
+	E("Aula E"),
+	
+	/**
+	 * Laboratorio Vela.
+	 */
+	VELA("Laboratorio vela"),
+	
+	/**
+	 * Laboratorio 2.
+	 */
+	LAB2("Laboratorio 2"),
+	
+	/**
+	 * Laboratorio 3.
+	 */
+	LAB3("Laboratorio 3"),
+	
+	/**
+	 * Aula G piano terra.
+	 */
+	GPT("Aula G PT"),
+	
+	/**
+	 * Aula G primo piano.
+	 */
+	GP1("Aula G P1");
 	
 	private final String name;
-	private final int nSeats;
 	
-	private Classrooms(final String s, final int n) {
+	private Classrooms(final String s) {
 		name = s;
-		nSeats = n;
 	}
-
+	
+	/**
+	 * 
+	 * @return Il nome completo dell'aula.
+	 */
 	public String getName() {
 		return name;
 	}
 	
-	public int getSeats() {
-		return nSeats;
-	}
-	
+	/**
+	 * 
+	 * @return Un Set che contiene i valori dell'Array restituito dal metodo {{@link #values()}.
+	 */
 	public static Set<Classrooms> getClassroomsValues() {
 		return new HashSet<>(Arrays.asList(Classrooms.values()));
 	}

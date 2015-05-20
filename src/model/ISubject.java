@@ -1,11 +1,26 @@
 package model;
-
+/**
+ * Interfaccia che definisce le operazioni standard di una materia.
+ * 
+ * @author Lorenzo Cottignoli
+ *
+ */
 public interface ISubject extends java.io.Serializable {
 	
-	//restituisce il nome della materia
+	/**
+	 * 
+	 * @return Nome della materia.
+	 */
 	String getSubName();
-	//restituisce il nome del professore
+	/**
+	 * 
+	 * @return Nome del professore che tiene questa lezione.
+	 */
 	String getTeachName();
-	//restituisce di che "tipo" è la materia
+
+	/**
+	 * 
+	 * @return Tipologia di materia.
+	 */
 	SubjectType getSubjectType();
 }

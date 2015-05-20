@@ -1,11 +1,16 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
+/**
+ * Implementazione dell'interfaccia {@link IDailyTime} tramite l'ultilizzo di una List di {@value IDailyTime#HOURS} elementi 
+ * che rappresentano le varie ore della giornata.
+ * 
+ * @author Lorenzo Cottignoli
+ *
+ */
 public class DailyTime implements IDailyTime {
 	
 	/**
@@ -15,29 +20,37 @@ public class DailyTime implements IDailyTime {
 	
 	private final List<ISubject> daily = new ArrayList<ISubject>();
 	
+	/**
+	 * Crea un nuovo orario giornaliero con tutte le ore libere, cioè a null.
+	 */
 	public DailyTime() {
 		for (int i = 0; i < HOURS; i++) {
 			daily.add(null);
 		}
 	}
 	
+	/**
+	 * Crea un nuovo orario giornaliero copiando quello passato come parametro.
+	 * 
+	 * @param dt Orario giornaliero da copiare.
+	 * @throws IllegalArgumentException se il parametro dt è null.
+	 */
 	public DailyTime(final IDailyTime dt) {
+		if (dt == null) {
+			throw new IllegalArgumentException("the parameter 'dt' can't be null!");
+		}
 		for (int i = 0; i < HOURS; i++) {
-			try {
-				daily.add(dt.getSubject(i + FIRST_HOUR).orElse(null));
-			} catch (WrongInputException e) {
-				e.printStackTrace();
-			}
+			daily.add(dt.getSubject(i + FIRST_HOUR).orElse(null));
 		}
 	}
 	
 
 	@Override
-	public void add(final ISubject sub, final int hour, final int n) throws WrongInputException {
+	public void add(final ISubject sub, final int hour, final int n) {
 		checkHour(hour, n);
 		for (int i = 0; i < n; i++) {
 			if (daily.get(hour - FIRST_HOUR + i) != null) {
-				throw new WrongInputException("These hours are already busy");
+				throw new IllegalArgumentException("These hours are already busy");
 			}
 		}
 		
@@ -47,7 +60,7 @@ public class DailyTime implements IDailyTime {
 	}
 	
 	@Override
-	public void remove(final int hour, final int n) throws WrongInputException {
+	public void remove(final int hour, final int n) {
 		checkHour(hour, n);
 		for (int i = 0; i < n; i++) {
 			daily.set(hour - FIRST_HOUR + i, null);
@@ -55,7 +68,7 @@ public class DailyTime implements IDailyTime {
 	}
 	
 	@Override
-	public Optional<ISubject> getSubject(final int hour) throws WrongInputException {
+	public Optional<ISubject> getSubject(final int hour) {
 		checkHour(hour);
 		return Optional.ofNullable(daily.get(hour - FIRST_HOUR));
 	}
@@ -65,21 +78,30 @@ public class DailyTime implements IDailyTime {
 		return new DailyTime(this);
 	}
 	
-	//controlla che l'ora inserita sia compresa tra le 9 e le 17 altrimenti tira un errore
-	private void checkHour(final int h) throws WrongInputException {
+	/**
+	 * Esegue il controllo su hour come specificato nel metodo {@link #getSubject(int)}.
+	 * 
+	 * @param hour Ora da controllare il valore.
+	 */
+	private void checkHour(final int h) {
 		if (h < FIRST_HOUR || h >= (FIRST_HOUR + HOURS)) {
-			throw new WrongInputException("Wrong hour! Must be beetween 9 to 17");
+			throw new IllegalArgumentException("Wrong hour! Must be beetween " + FIRST_HOUR + " to " + (FIRST_HOUR + HOURS - 1));
 		}
 	}
 	
-	//controlla che l'ora + il numero di ore per cui va effettuata una determinata operazione non sia superiore a 17, altrimenti errore
-	private void checkHour(final int h, final int n) throws WrongInputException {
-		checkHour(h);
+	/**
+	 * Esegue tutti i controlli dichiarati nel metodo {@link #add(ISubject, int, int)} e nel metodo {@link #remove(int, int)}.
+	 * 
+	 * @param hour Ora di inizio.
+	 * @param n Numero di ore consecutive a partire da hour.
+	 */
+	private void checkHour(final int hour, final int n) {
+		checkHour(hour);
 		if (n <= 0) {
-			throw new WrongInputException("Wrong number of hour! Must be greater than 0");
+			throw new IllegalArgumentException("Wrong number of hour! Must be greater than 0!");
 		}
-		if ((h + n) > (FIRST_HOUR + HOURS)) {
-			throw new WrongInputException("Wrong number of hour! Hour + Number must not be greater than 17");
+		if ((hour + n) > (FIRST_HOUR + HOURS)) {
+			throw new IllegalArgumentException("Wrong number of hour! Hour + Number must not be greater than " + (FIRST_HOUR + HOURS));
 		}
 	}
 

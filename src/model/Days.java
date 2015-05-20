@@ -4,16 +4,38 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-
+/**
+ * Classe enumerator per rappresentare i giorni in cui l'università tiene lezioni.
+ * 
+ * @author Lorenzo Cottignoli
+ *
+ */
 public enum Days {
 	
+	/**
+	 * Monday.
+	 */
 	MONDAY("Monday"), 
-	TUESDAY("Tuesday"), 
-	WEDNESDEY("Wednesday"), 
-	THURSDAY("Thursday"), 
-	FRIDAY("Friday");
 	
-	public static final int N_DAYS = 5;
+	/**
+	 * Tuesday.
+	 */
+	TUESDAY("Tuesday"), 
+	
+	/**
+	 * Wednesday.
+	 */
+	WEDNESDEY("Wednesday"), 
+	
+	/**
+	 * Thursday.
+	 */
+	THURSDAY("Thursday"), 
+	
+	/**
+	 * Friday.
+	 */
+	FRIDAY("Friday");
 	
 	private final String name;
 	
@@ -21,10 +43,18 @@ public enum Days {
 		name = s;
 	}
 	
+	/**
+	 * 
+	 * @return una String contenente il nome del giorno.
+	 */
 	public String getName() {
 		return name;
 	}
 	
+	/**
+	 * 
+	 * @return Un Set che contiene i valori dell'Array restituito dal metodo {{@link #values()}.
+	 */
 	public static Set<Days> getDaysValues() {
 		return new HashSet<>(Arrays.asList(Days.values()));
 	}
