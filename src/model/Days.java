@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Classe enumerator per rappresentare i giorni in cui l'università tiene lezioni.
+ * Enumerator class in order to represent days in which lessons are hold at the university.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -45,7 +45,7 @@ public enum Days {
 	
 	/**
 	 * 
-	 * @return una String contenente il nome del giorno.
+	 * @return String containing the name of the day.
 	 */
 	public String getName() {
 		return name;
@@ -53,7 +53,7 @@ public enum Days {
 	
 	/**
 	 * 
-	 * @return Un Set che contiene i valori dell'Array restituito dal metodo {{@link #values()}.
+	 * @return Set containing values of the Array given back from the method {{@link #values()}.
 	 */
 	public static Set<Days> getDaysValues() {
 		return new HashSet<>(Arrays.asList(Days.values()));

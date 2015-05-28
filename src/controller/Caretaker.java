@@ -4,8 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import controller.interfaces.ICaretaker;
+
 /**
- * Implementazione dell'interfaccia {@link ICareTaker} tramite l'utilizzo di una {@link LinkedList}.
+ * Implementation of the interface {@link ICareTaker} through the use of a {@link LinkedList}.
  * 
  * @author Lorenzo Cottignoli
  *

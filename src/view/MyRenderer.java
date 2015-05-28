@@ -11,8 +11,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import model.SubjectType;
 
 /**
- * Redifinizione della classe {@link DefaultTableCellRenderer} in modo da permettere di modificare la larghezza e l'altezza delle celle
- * e di ricolorarle in base al loro contenuto.
+ * Class that extends {@link DefaultTableCellRenderer} to allow to change the width and height of the cells
+ * and color them according to their content.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -28,7 +28,7 @@ public class MyRenderer extends DefaultTableCellRenderer {
 	private final JScrollPane scroll;
 
 	/**
-	 * Costruttore che inizializza i vari campi di questa classe.
+	 * Constructor that initializes private fields.
 	 */
 	public MyRenderer() {
 		super();

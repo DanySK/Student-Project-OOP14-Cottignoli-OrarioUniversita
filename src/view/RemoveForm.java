@@ -13,10 +13,10 @@ import javax.swing.SpinnerNumberModel;
 import model.Classrooms;
 import model.DailyTime;
 import model.Days;
-import model.IDailyTime;
+import model.interfaces.IDailyTime;
 
 /**
- * Form per la rimozione di una o più ore dall'orario.
+ * Dialog for removing subjects from timetable.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -34,7 +34,7 @@ public class RemoveForm extends AbstractForm {
 	
 	/**
 	 * 
-	 * @param v Frame principale.
+	 * @param v The frame from which the dialog is displayed.
 	 */
 	public RemoveForm(final Frame v) {
 		super(v);
@@ -66,36 +66,36 @@ public class RemoveForm extends AbstractForm {
 	}
 	
 	/**
-	 * Metodo per recuperare il giorno in cui eliminare le materie.
+	 * Method to retrieve the selected day.
 	 * 
-	 * @return Giorno selezionato.
+	 * @return Selected day.
 	 */
 	public Days getDay() {
 		return (Days) days.getSelectedItem();
 	}
 	
 	/**
-	 * Metodo per recuperare l'ora di inizio da cui iniziare ad eliminare.
+	 * Method to retrieve the lesson starting time.
 	 * 
-	 * @return Ora selezionata.
+	 * @return Lesson starting time.
 	 */
 	public int getHour() {
 		return DailyTime.FIRST_HOUR + hour.getSelectedIndex();
 	}
 	
 	/**
-	 * Metodo per recuperare l'aula in cui eliminare le materie.
+	 * Method to retrieve the selected classroom.
 	 * 
-	 * @return Aula selezionata.
+	 * @return Selected classroom.
 	 */
 	public Classrooms getClassroom() {
 		return (Classrooms) cls.getSelectedItem();
 	}
 	
 	/**
-	 * Metodo per recuperare il numero di ore consecutive da eliminare.
+	 * Method to retrieve the number of consecutive hours.
 	 * 
-	 * @return Numero dello ore consecutive.
+	 * @return Number of consecutive hours.
 	 */
 	public int getNumberHours() {
 		return (int) spin.getValue();

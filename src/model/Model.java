@@ -6,11 +6,15 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import model.interfaces.IModel;
+import model.interfaces.ISubject;
+import model.interfaces.IWeeklyTime;
+
 /**
- * Implementazione dell'interfaccia IModel tramite una Map con chiave i semestri e come valore associato {@link IWeeklyTime} e un Set di 
- * {@link ISubject} per la lista delle materie disponibili.
+ * Implementation of the interface IModel through a Map with semester as key and as associated value {@link IWeeklyTime} and a Set of
+ * {@link ISubject} for the list of available courses.
  * 
- * @author Cotti
+ * @author Lorenzo Cottignoli
  *
  */
 public class Model implements IModel {
@@ -24,7 +28,7 @@ public class Model implements IModel {
 	private Set<ISubject> subjects = new HashSet<>();
 	
 	/**
-	 * Costruttore che inizializza le strutture dati utilizzate.
+	 * Constructor that initialize the data structures.
 	 */
 	public Model() {
 		semester.put(FIRST_SEM, new WeeklyTime());
@@ -112,10 +116,11 @@ public class Model implements IModel {
 	}
 	
 	/**
-	 * Metodo per controllare che il valore passato come semestre sia coerente.
+	 * Method that is necessary to control that the value passed as semester is coherent.
 	 * 
-	 * @param sem Semestre da controllare.
-	 * @throws IllegalArgumentException se sem non è uguale ne a {@link IModel#FIRST_SEM} ne a {@link IModel#SEC_SEM}.
+	 * @param sem Semester that has to be controlled.
+	 * @throws IllegalArgumentException if sem is not the same of {@link IModel#FIRST_SEM} nor 
+	 * of {@link IModel#SEC_SEM}.
 	 */
 	private void checkSem(final int sem) {
 		if (sem != FIRST_SEM && sem != SEC_SEM) {
@@ -124,9 +129,9 @@ public class Model implements IModel {
 	}
 	
 	/**
-	 * Metodo per creare una copia della struttura principale.
+	 * Method to create a copy of the principal structure.
 	 * 
-	 * @return copia della struttura.
+	 * @return Copy of the structure.
 	 */
 	private Map<Integer, IWeeklyTime> createCopy() {
 		final Map<Integer, IWeeklyTime> map = new HashMap<>();
@@ -140,10 +145,10 @@ public class Model implements IModel {
 		private Object st;
 		
 		/**
-		 * Costruttore che assegna allo stato interno l'oggetto passato come parametro.
+		 * Constructor that give to the internal state the object passed as parameter.
 		 * 
-		 * @param s Stato che verrà salvato in questo oggetto.
-		 * @throws IllegalArgumentException se s è null.
+	 	 * @param s State that will be saved in this object.
+	 	 * @throws IllegalArgumentException if s is null.
 		 */
 		Memento(final Object s) {
 			if (s == null) {

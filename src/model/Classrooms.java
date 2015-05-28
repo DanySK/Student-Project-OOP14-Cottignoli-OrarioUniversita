@@ -5,7 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Enumerator class utilizzata per rappresentare le aule disponibili nella facoltà di scienze e tecnologie informatiche di Cesena.
+ * Enumerator class used to represent available classroom inside the faculty of informatics science and 
+ * technology in Cesena.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -18,52 +19,52 @@ public enum Classrooms {
 	MAGNA("Aula magna"),
 	
 	/**
-	 * Aula A.
+	 * Classroom A.
 	 */
 	A("Aula A"),
 	
 	/**
-	 * Aula B.
+	 * Classroom B.
 	 */
 	B("Aula B"),
 	
 	/**
-	 * Aula C.
+	 * Classroom C.
 	 */
 	C("Aula C"),
 	
 	/**
-	 * Aula D.
+	 * Classroom D.
 	 */
 	D("Aula D"),
 	
 	/**
-	 * Aula E.
+	 * Classroom E.
 	 */
 	E("Aula E"),
 	
 	/**
-	 * Laboratorio Vela.
+	 * Vela laboratory.
 	 */
 	VELA("Laboratorio vela"),
 	
 	/**
-	 * Laboratorio 2.
+	 * Laboratory 2.
 	 */
 	LAB2("Laboratorio 2"),
 	
 	/**
-	 * Laboratorio 3.
+	 * Laboratory 3.
 	 */
 	LAB3("Laboratorio 3"),
 	
 	/**
-	 * Aula G piano terra.
+	 * Classroom G ground floor.
 	 */
 	GPT("Aula G PT"),
 	
 	/**
-	 * Aula G primo piano.
+	 * Classroom G first floor.
 	 */
 	GP1("Aula G P1");
 	
@@ -75,7 +76,7 @@ public enum Classrooms {
 	
 	/**
 	 * 
-	 * @return Il nome completo dell'aula.
+	 * @return The complete name of the classroom.
 	 */
 	public String getName() {
 		return name;
@@ -83,7 +84,7 @@ public enum Classrooms {
 	
 	/**
 	 * 
-	 * @return Un Set che contiene i valori dell'Array restituito dal metodo {{@link #values()}.
+	 * @return A Set that contain values of the Array given back from the method {{@link #values()}.
 	 */
 	public static Set<Classrooms> getClassroomsValues() {
 		return new HashSet<>(Arrays.asList(Classrooms.values()));

@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import model.interfaces.IDailyTime;
+import model.interfaces.ISubject;
+
 /**
- * Implementazione dell'interfaccia {@link IDailyTime} tramite l'ultilizzo di una List di {@value IDailyTime#HOURS} elementi 
- * che rappresentano le varie ore della giornata.
+ * Implementation of the interface {@link IDailyTime} through the usage of a List of {@value IDailyTime#HOURS} elements
+ * that represent all the hours of the day.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -21,7 +24,7 @@ public class DailyTime implements IDailyTime {
 	private final List<ISubject> daily = new ArrayList<ISubject>();
 	
 	/**
-	 * Crea un nuovo orario giornaliero con tutte le ore libere, cioè a null.
+	 * It creates a new daily timetable with all available hours, namely in null form.
 	 */
 	public DailyTime() {
 		for (int i = 0; i < HOURS; i++) {
@@ -30,10 +33,10 @@ public class DailyTime implements IDailyTime {
 	}
 	
 	/**
-	 * Crea un nuovo orario giornaliero copiando quello passato come parametro.
+	 * It creates a new daily timetable by copying the old one using it as a parameter.
 	 * 
-	 * @param dt Orario giornaliero da copiare.
-	 * @throws IllegalArgumentException se il parametro dt è null.
+	 * @param dt Daily timetable to be copied.
+	 * @throws IllegalArgumentException if the parameter dt is null.
 	 */
 	public DailyTime(final IDailyTime dt) {
 		if (dt == null) {
@@ -79,9 +82,9 @@ public class DailyTime implements IDailyTime {
 	}
 	
 	/**
-	 * Esegue il controllo su hour come specificato nel metodo {@link #getSubject(int)}.
+	 * It carries out the control on hour as specified in the method {@link #getSubject(int)}.
 	 * 
-	 * @param hour Ora da controllare il valore.
+	 * @param hour Value of the day that has to be controlled.
 	 */
 	private void checkHour(final int h) {
 		if (h < FIRST_HOUR || h >= (FIRST_HOUR + HOURS)) {
@@ -90,10 +93,11 @@ public class DailyTime implements IDailyTime {
 	}
 	
 	/**
-	 * Esegue tutti i controlli dichiarati nel metodo {@link #add(ISubject, int, int)} e nel metodo {@link #remove(int, int)}.
+	 * It carries out all the controls declared in the method {@link #add(ISubject, int, int)} 
+	 * and in the method {@link #remove(int, int)}.
 	 * 
-	 * @param hour Ora di inizio.
-	 * @param n Numero di ore consecutive a partire da hour.
+	 * @param hour Starting time.
+	 * @param n Number of consecutive hours starting from hour.
 	 */
 	private void checkHour(final int hour, final int n) {
 		checkHour(hour);

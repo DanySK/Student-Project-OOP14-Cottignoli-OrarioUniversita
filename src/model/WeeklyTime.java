@@ -5,10 +5,14 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import model.interfaces.IClassroomsDailyTime;
+import model.interfaces.ISubject;
+import model.interfaces.IWeeklyTime;
+
 /**
  * 
- * Implementazione dell'interfaccia {@link IWeeklyTime} tramite l'utilizzo di una Map che come chiave ha i valori di 
- * {@link Days#values()} ed associato ad ognuna un {@link IClassroomsDailyTime}.
+ * Implementation of the interface {@link IWeeklyTime} through the use of a Map that has the values of 
+ * {@link Days#values()} as key and it has associated to everyone a {@link IClassroomsDailyTime}.
  * 
  * @author Lorenzo Cottignoli
  * 
@@ -23,7 +27,7 @@ public class WeeklyTime implements IWeeklyTime {
 	private final Map<Days, IClassroomsDailyTime> week = new HashMap<>();
 	
 	/**
-	 * Costruttore che crea una struttura vuota.
+	 * Constructor that creates a new structure.
 	 */
 	public WeeklyTime() {
 		for (final Days d : Days.values()) {
@@ -32,10 +36,11 @@ public class WeeklyTime implements IWeeklyTime {
 	}
 	
 	/**
-	 * Costruttore che crea una nuova struttura copiando quella passata come parametro.
+	 Constructor that creates a new structure by copying the old one using it as parameter.
 	 * 
-	 * @param wt struttura da copiare.
-	 * @throws IllegalArgumentException se wt è null.
+	 * @param wt structure to be copied.
+	 * @throws IllegalArgumentException if wt is null.
+
 	 */
 	public WeeklyTime(final IWeeklyTime wt) {
 		if (wt == null) {
@@ -88,10 +93,10 @@ public class WeeklyTime implements IWeeklyTime {
 	}
 
 	/**
-	 * Metodo per controllare se un giorno è uguale a null.
+	  * Method to control if a day is equal to null.
 	 * 
-	 * @param d Giorno da controllare.
-	 * @throws IllegalArgumentException se d è null.
+	 * @param d Day to be controlled.
+	 * @throws IllegalArgumentException if d is null.
 	 */
 	private void checkDay(final Days d) {
 		if (d == null) {

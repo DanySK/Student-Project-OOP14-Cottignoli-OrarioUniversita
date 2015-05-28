@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import model.SubjectType;
 
 /**
- * Form per l'inserimento dei dati necessari per creare una nuova materia.
+ * Dialog for inserting data needed to create a new subject .
  * 
  * @author Lorenzo Cottignoli
  *
@@ -29,7 +29,7 @@ public class AddSubjectForm extends AbstractForm {
 
 	/**
 	 * 
-	 * @param v Frame principale.
+	 * @param v The Frame from which the dialog is displayed.
 	 */
 	public AddSubjectForm(final Frame v) {
 		super(v);
@@ -55,27 +55,27 @@ public class AddSubjectForm extends AbstractForm {
 	}
 	
 	/**
-	 * Metodo per recuperare il nome della nuova materia.
+	 * Method to retrieve the subject's name.
 	 * 
-	 * @return Nome della materia.
+	 * @return Subject's name.
 	 */
 	public String getSubName() {
 		return sub.getText();
 	}
 	
 	/**
-	 * Metodo per recuperare il nome del professore che tiene la materia.
+	 * Method to retrieve the name of the teacher who gives this lesson.
 	 * 
-	 * @return Nome del professore.
+	 * @return Name of the teacher who gives this lesson.
 	 */
 	public String getTeachName() {
 		return teach.getText();
 	}
 	
 	/**
-	 * Metodo per recuperare la tipologia della materia.
+	 * Method to retrieve the subject type.
 	 * 
-	 * @return Tipo di materia.
+	 * @return Subject type.
 	 */
 	public SubjectType getSubType() {
 		return (SubjectType) type.getSelectedItem();

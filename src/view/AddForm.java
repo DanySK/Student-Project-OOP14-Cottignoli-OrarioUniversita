@@ -14,11 +14,11 @@ import javax.swing.SpinnerNumberModel;
 import model.Classrooms;
 import model.DailyTime;
 import model.Days;
-import model.IDailyTime;
-import model.ISubject;
+import model.interfaces.IDailyTime;
+import model.interfaces.ISubject;
 
 /**
- * Form per l'inserimento dei dati necessari per aggiungere una materia nell'orario.
+ * Dialog for inserting the data needed to add a subject in the timetable .
  * 
  * @author Lorenzo Cottignoli
  *
@@ -40,7 +40,7 @@ public class AddForm extends AbstractForm {
 	
 	/**
 	 * 
-	 * @param v Frame principale.
+	 * @param v the Frame from which the dialog is displayed.
 	 */
 	public AddForm(final Frame v) {
 		super(v);
@@ -62,10 +62,9 @@ public class AddForm extends AbstractForm {
 	}
 
 	/**
-	 * Metodo per inserire la lista delle materie disponibili, in modo che l'untente possa selezionare
-	 * quale aggiungere.
+	 * Method to add the list of available subjects to JComboBox, so the user can select which add.
 	 * 
-	 * @param s Set delle materie disponibili.
+	 * @param s Set of available subjects.
 	 */
 	public void setList(final Set<ISubject> s) {
 		sub.removeAllItems();
@@ -82,45 +81,45 @@ public class AddForm extends AbstractForm {
 	}
 	
 	/**
-	 * Metodo per recuperare la materia selezionata.
+	 * Method to retrieve the selected subject.
 	 * 
-	 * @return Materia selezionata.
+	 * @return Selected subject.
 	 */
 	public ISubject getSubject() {
 		return (ISubject) sub.getSelectedItem();
 	}
 	
 	/**
-	 * Metodo per recuperare il giorno selezionato.
+	 * Method to retrieve the selected day.
 	 * 
-	 * @return Giorno selezionato.
+	 * @return Selected day.
 	 */
 	public Days getDay() {
 		return (Days) days.getSelectedItem();
 	}
 	
 	/**
-	 * Metodo per recuperare l'aula selezionata.
+	 * Method to retrieve the selected classroom.
 	 * 
-	 * @return Aula selezionata.
+	 * @return Selected classroom.
 	 */
 	public Classrooms getClassroom() {
 		return (Classrooms) cls.getSelectedItem();
 	}
 	
 	/**
-	 * Metodo per recuperare l'ora di inizio della materia.
+	 * Method to retrieve the lesson starting time.
 	 * 
-	 * @return Ora d'inizio della lezione selezionata.
+	 * @return Lesson starting time.
 	 */
 	public int getHour() {
 		return DailyTime.FIRST_HOUR + hour.getSelectedIndex();
 	}
 	
 	/**
-	 * Metodo per recuperare il numero di ore consecutive.
+	 * Method to retrieve the number of consecutive hours.
 	 * 
-	 * @return Ore consecutive in cui inserire la materia.
+	 * @return Number of consecutive hours.
 	 */
 	public int getNumberHours() {
 		return (int) spin.getValue();

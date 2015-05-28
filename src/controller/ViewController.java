@@ -5,16 +5,19 @@ import java.util.Arrays;
 import java.util.List;
 
 import model.Classrooms;
-import model.DailyTime;
 import model.Days;
-import model.IModel;
-import model.ISubject;
 import model.SubjectType;
-import view.IView;
+import model.interfaces.IDailyTime;
+import model.interfaces.IModel;
+import model.interfaces.ISubject;
+import view.interfaces.IView;
+import controller.interfaces.ICaretaker;
+import controller.interfaces.IViewController;
+import controller.interfaces.MyFunction;
 
 /**
- * Implementazione dell'interfaccia {@link IViewController} utilizzando come struttura per salvare gli stati del modello un'implementazione
- * dell'interfaccia {@link ICaretaker}.
+ * Implementation of the interface {@link IViewController} using an implementation of the interface 
+ * {@link ICaretaker} as a structure to save the states of the model.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -29,9 +32,9 @@ public class ViewController implements IViewController {
 	private Object obj;
 	
 	/**
-	 * Costruttore che setta il modello su cui operare.
+	 * Constructor that sets the model to work on.
 	 * 
-	 * @param m Modello su cui operare.
+	 * @param m Model to work on.
 	 */
 	public ViewController(final IModel m) {
 		model = m;
@@ -137,18 +140,18 @@ public class ViewController implements IViewController {
 	}
 	
 	/**
-	 * Metodo per creare la vista completa per un giorno di un semestre.
+	 * Method to create the complete view for one specific day of one given semester.
 	 * 
-	 * @param sem Semestre del quale si vuole avere l'orario completo di un determinato giorno.
-	 * @param d Giorno di cui si vuole avere l'orario completo.
-	 * @return Orario completo di un giorno sottoforma di List.
+	 * @param sem Semester of which we want to see the complete timetable of a specific day.
+	 * @param d Day of which we want to see the complete timetable.
+	 * @return Complete timetable of one specific day in the form of List.
 	 */
 	private List<Object> viewDay(final int sem, final Days d) {
 		INTEST.set(0, d.getName());
 		final List<Object> list = new ArrayList<>(INTEST);
 		for (final Classrooms cls : Classrooms.values()) {
 			list.add(cls.getName());
-			for (int i = DailyTime.FIRST_HOUR; i < (DailyTime.FIRST_HOUR + DailyTime.HOURS); i++) {
+			for (int i = IDailyTime.FIRST_HOUR; i < (IDailyTime.FIRST_HOUR + IDailyTime.HOURS); i++) {
 				if (model.getSubject(sem, d, cls, i).isPresent()) {
 					list.add(model.getSubject(sem, d, cls, i).get());
 				} else {
@@ -160,10 +163,10 @@ public class ViewController implements IViewController {
 	}
 	
 	/**
-	 * Metodo per creare la vista completa dell'orario di un semestre.
+	 * Method to create the complete view of the timetable of one specific semester.
 	 * 
-	 * @param sem Semestre del quale si vuole avere l'orario completo.
-	 * @return Orario completo sottoforma di List.
+	 * @param sem Semester of which we want to see the complete timetable.
+	 * @return Complete timetable in the form of List.
 	 */
 	private List<Object> viewTot(final int sem) {
 		final List<Object> list = new ArrayList<>();
@@ -174,19 +177,20 @@ public class ViewController implements IViewController {
 	}
 	
 	/**
-	 * Metodo per creare viste simili che differiscono solo per la scelta del for interno. Questa
-	 * scelta è stata affidata ad una interfaccia funzionale per evitare duplicazione di codice.
+	 * Method to create similar views that differ only for the choice of the internal for. This
+	 * choice was given to a functional interface in order to avoid duplication of code.
 	 * 
-	 * @param sem Semestre del quale si vuole avere la vista.
-	 * @param fun Funzione che definisce la scelta interna.
-	 * @return Vista definita grazie a fun sottoforma di List.
+	 * @param sem Semester of which we want to see the view.
+	 * @param fun Function that defines the internal choice.
+	 * @return View defined thanks to the fun in the form of List.
+
 	 */
 	private List<Object> viewFunct(final int sem, final MyFunction<?> fun) {
 		INTEST.set(0, "Days");
 		final List<Object> list = new ArrayList<>(INTEST);
 		for (final Days d : Days.values()) {
 			list.add(d.getName());
-			for (int i = DailyTime.FIRST_HOUR; i < (DailyTime.FIRST_HOUR + DailyTime.HOURS); i++) {
+			for (int i = IDailyTime.FIRST_HOUR; i < (IDailyTime.FIRST_HOUR + IDailyTime.HOURS); i++) {
 				list.add(fun.apply(sem, d, i));
 			}
 		}

@@ -7,7 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- * Utility class che serve per salvare e caricare su file qualsiasi oggetto che implementi l'interfaccia {@link java.io.Serializable}.
+ * Utility class necessary to save and load on file every object that implements the interface 
+ * {@link java.io.Serializable}.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -19,10 +20,10 @@ public final class SaveLoad {
 	}
 	
 	/**
-	 * Metodo per salvare un oggetto su file.
+	 * Method to save an object on a file.
 	 * 
-	 * @param fileName The system-dependent filename
-	 * @param obj Oggetto da salvare su file.
+	 * @param fileName The system-dependent filename.
+	 * @param obj Object to be saved on file.
 	 * @throws IOException {@link ObjectOutputStream#writeObject(Object)}.
 	 */
 	public static void commandSave(final String fileName, final Object obj) throws IOException {
@@ -32,12 +33,12 @@ public final class SaveLoad {
 	}
 	
 	/**
-	 * Metodo per caricare un oggetto da file.
+	 * Method to load an object on a file.
 	 * 
-	 * @param fileName The system-dependent filename
-	 * @return Oggetto caricato da file.
+	 * @param fileName The system-dependent filename.
+	 * @return Object loaded from a file.
 	 * @throws IOException construct method of {@link ObjectIntputStream}.
-	 * @throws ClassNotFoundException {@link ObjectInputStream#readObject()}
+	 * @throws ClassNotFoundException {@link ObjectInputStream#readObject()}.
 	 */
 	public static Object commandLoad(final String fileName) throws IOException, ClassNotFoundException {
 		final ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));

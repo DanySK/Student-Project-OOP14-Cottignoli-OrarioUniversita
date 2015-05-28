@@ -5,14 +5,14 @@ import static model.SubjectType.LT2;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import model.DailyTime;
-import model.IDailyTime;
-import model.ISubject;
 import model.Subject;
+import model.interfaces.IDailyTime;
+import model.interfaces.ISubject;
 
 import org.junit.Test;
 
 /**
- * Classe per testare il corretto funzionamento della classe {@link DailyTime}.
+ * Class for testing the correct working of the class {@link DailyTime}.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -22,8 +22,8 @@ public class TestDailyTime {
 	private static final String S = "Success!";
 	
 	/**
-	 * Test per controllare che la classe DailyTime segui il funzionamento indicato nei metodi dell'interfaccia 
-	 * {@link IDailyTime}.
+	 * Necessary test to control that the class DailyTime follows the correct working 
+	 * specified in the methods of the interface {@link IDailyTime}.
 	 */
 	@Test
 	public void test(){

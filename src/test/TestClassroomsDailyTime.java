@@ -9,14 +9,14 @@ import static model.SubjectType.LT3;
 import static org.junit.Assert.fail;
 import model.Classrooms;
 import model.ClassroomsDailyTime;
-import model.IClassroomsDailyTime;
-import model.ISubject;
 import model.Subject;
+import model.interfaces.IClassroomsDailyTime;
+import model.interfaces.ISubject;
 
 import org.junit.Test;
 
 /**
- * Classe per testare il corretto funzionamento della classe {@link ClassroomsDailyTime}.
+ * * Class for testing the correct working of the class {@link ClassroomsDailyTime}.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -26,8 +26,8 @@ public class TestClassroomsDailyTime {
 	private static final String S = "Success!";
 	
 	/**
-	 * Test per controllare che la classe ClassroomsDailyTime segui il funzionamento indicato nei metodi dell'interfaccia 
-	 * {@link IClassroomsDailyTime}.
+	 * Necessary test to control that the class ClassroomsDailyTime follows the correct 
+	 * working specified in the methods of the interface {@link IClassroomsDailyTime}.
 	 */
 	@Test
 	public void test() {

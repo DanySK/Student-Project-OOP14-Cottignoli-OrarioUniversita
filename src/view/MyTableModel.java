@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import model.interfaces.IDailyTime;
+
 /**
- * Classe che estende {@link AbstractTableModel} in modo da gestire il modello di una tabella tramite una {@link List}.
+ * Class that extends {@link AbstractTableModel} to manage table model using a {@link List}.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -17,7 +19,7 @@ public class MyTableModel extends AbstractTableModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final int COL_NUM = 10;
+	private static final int COL_NUM = IDailyTime.HOURS + 1;
 	
 	private List<Object> list = new ArrayList<>();
 	
@@ -42,9 +44,10 @@ public class MyTableModel extends AbstractTableModel {
 	}
 	
 	/**
-	 * Metodo per settare come modello della tabella la {@link List} passata come parametro.
+	 * Method to set the table model using a {@link List} passed as parameter.
 	 * 
-	 * @param l Nuovo modello della tabella.
+	 * @param l New table model.
+	 * @throws IllegalArgumentException if l is null.
 	 */
 	public void setModel(final List<Object> l) {
 		if (l == null) {

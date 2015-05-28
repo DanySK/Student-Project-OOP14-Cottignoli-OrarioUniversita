@@ -12,12 +12,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
-import model.IModel;
-import model.ISubject;
-import controller.IController;
+import model.interfaces.IModel;
+import model.interfaces.ISubject;
+import view.interfaces.IView;
+import controller.interfaces.IController;
 
 /**
- * Implementazione dell'interfaccia {@link IView}.
+ * Implementation of interface {@link IView}.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -33,8 +34,8 @@ public class View extends JFrame implements IView {
 	
 	private final JButton bAdd = new JButton("Add");
 	private final JButton bRemove = new JButton("Remove");
-	private final JRadioButton rdbtnFirst = new JRadioButton("Primo Semestre");
-	private final JRadioButton rdbtnSecond = new JRadioButton("Secondo Semestre");
+	private final JRadioButton rdbtnFirst = new JRadioButton("First semester");
+	private final JRadioButton rdbtnSecond = new JRadioButton("Second semester");
 	
 	private final AddSubjectForm fAddSub = new AddSubjectForm(this);
 	private final ListObjectForm fRemSub = new ListObjectForm(this);
@@ -49,7 +50,7 @@ public class View extends JFrame implements IView {
 	private IController controller;
 	
 	/**
-	 * Creazione del form.
+	 * Form creation.
 	 */
 	public View() {
 		super(WINDOW_TITLE);
@@ -62,7 +63,7 @@ public class View extends JFrame implements IView {
 	}
 	
 	/**
-	 * Metodo che definisce il layout del form.
+	 * Method to define form layout.
 	 */
 	private void buildLayout() {	
 		final JMenuBar menuBar = new JMenuBar();
@@ -76,7 +77,7 @@ public class View extends JFrame implements IView {
 	}
 	
 	/**
-	 * Metodo per assegnare ai vari componenti i rispettivi listener.
+	 * Method to assign to components their listeners.
 	 */
 	private void setHandlers() {
 
@@ -134,7 +135,7 @@ public class View extends JFrame implements IView {
 			@Override
 			public void componentHidden(final ComponentEvent e) {
 				if (fRemove.isOk()) {
-					controller.commandRemove(getSelectedSem(), fRemove.getDay(), fRemove.getClassroom(), fRemove.getHour(), 1);
+					controller.commandRemove(getSelectedSem(), fRemove.getDay(), fRemove.getClassroom(), fRemove.getHour(), fRemove.getNumberHours());
 				}
 			}
 		});

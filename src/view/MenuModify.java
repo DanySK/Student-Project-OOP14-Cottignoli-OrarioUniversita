@@ -4,7 +4,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import controller.IController;
+import view.interfaces.IView;
+import controller.interfaces.IController;
 
 /**
  * Menù per la gestione delle operazioni di: undo, redo, aggiunta e rimozione di una materia dalla lista delle materie
@@ -31,11 +32,11 @@ public class MenuModify extends JMenu {
 	private IController controller;
 	
 	/**
-	 * Creazione del menù.
+	 * Menu creation.
 	 * 
-	 * @param v View su cui verrà messo il menù.
-	 * @param add Form per l'inserimento dei dati relativi alla creazione di una nuova materia.
-	 * @param rem Form per la selezione della materia da eliminare dalla lista.
+	 * @param v View The view from which the menù is displayed.
+	 * @param add Dialog for inserting data related to the creation of a new subject .
+	 * @param rem Dialog to select the subject to delete from the list.
 	 */
 	public MenuModify(final IView v, final AddSubjectForm add, final ListObjectForm rem) {
 		super("Modify");
@@ -53,35 +54,34 @@ public class MenuModify extends JMenu {
 	}
 	
 	/**
-	 * Metodo per associare un controller a questo menù, in modo tale che gli handlers dei
-	 * componenti funzionino sullo stesso controller che gestiste il Frame su cui è inserito il menù. 
+	 * Method to attach a controller at this menu.
 	 * 
-	 * @param ctrl Controller su cui poter effettuare le operazioni che mette a disposizione questo menù.
+	 * @param ctrl Controller on which performing the operations that provides this menu.
 	 */
 	public void setController(final IController ctrl) {
 		controller = ctrl;
 	}
 	
 	/**
-	 * Metodo per abilitare o disabilitare il pulsante undo.
+	 * Method to enable or disable undo command in the view.
 	 * 
-	 * @param bool se è true abilita il pulsante, altrimenti lo disabilita.
+	 * @param bool if is true it will be enabled, otherwise will be disabled.
 	 */
 	public void setEnabledCommandUndo(final boolean bool) {
 		itemUndo.setEnabled(bool);
 	}
 
 	/**
-	 * Metodo per abilitare o disabilitare il pulsante redo.
+	 * Method to enable or disable redo command in the view.
 	 * 
-	 * @param bool se è true abilita il pulsante, altrimenti lo disabilita.
+	 * @param bool if is true it will be enabled, otherwise will be disabled.
 	 */
 	public void setEnabledCommandRedo(final boolean bool) {
 		itemRedo.setEnabled(bool);
 	}
 	
 	/**
-	 * Metodo che associa ad ogni {@link JMenuItem} il proprio listener in base all'operazione che deve svolgere.
+	 * Method that associates to each {@link JMenuItem} a listener based on what operation it must perform.
 	 */
 	private void setHandlers() {
 		itemUndo.addActionListener(e -> {

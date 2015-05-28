@@ -1,7 +1,7 @@
 package controller;
 
 /**
- * Enumerator class per le varie tipologie di viste del modello.
+ * * Enumerator class for all type of view of the model.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -9,31 +9,31 @@ package controller;
 public enum ViewsType {
 
 	/**
-	 * Indica una vista totale dell'orario universitario.
+	 * Variable for complete view of the academic timetable.
 	 */
 	TOT("Total"),
 	
 	/**
-	 * Indica una vista dell'orario universitario in base al professore.
+	 * Variable for view of the academic timetable depending on the teacher.
 	 */
 	TEACH("Teacher"),
 	
 	/**
-	 * Indica una vista dell'orario universitario in base alla materia.
+	 * Variable for view of the academic timetable depending on the subject.
 	 */
 	SUB("Subject"),
 	
 	/**
-	 * Indica una vista dell'orario universitario in base all'aula.
+	 * Variable for view of the academic timetable depending on the classroom.
 	 */
 	ROOM("Classroom"),
 	
 	/**
-	 * Indica una vista dell'orario universitario in base al giorno.
+	 * Variable for view of the academic timetable depending on the day.
 	 */
 	DAY("Day"),
 	/**
-	 * Indica una vista dell'orario universitario in base al tipo di materia.
+	 * Variable for view of the academic timetable according to the type of subject.
 	 */
 	SUB_TYPE("Subject Type");
 	
@@ -44,7 +44,7 @@ public enum ViewsType {
 	}
 	
 	/**
-	 * @return La descrizione completa del tipo di vista.
+	 * @return The complete description of the type of view.
 	 */
 	public String getDescription() {
 		return description;

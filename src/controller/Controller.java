@@ -5,14 +5,16 @@ import java.util.Set;
 
 import model.Classrooms;
 import model.Days;
-import model.IModel;
-import model.ISubject;
 import model.Model;
 import model.SubjectType;
-import view.IView;
+import model.interfaces.IModel;
+import model.interfaces.ISubject;
+import view.interfaces.IView;
+import controller.interfaces.IController;
+import controller.interfaces.IViewController;
 
 /**
- * Implementazione dell'interfaccia {@link IController}.
+ * Implementation of the interface {@link IController}.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -24,7 +26,7 @@ public class Controller implements IController {
 	private final IViewController vcontr = new ViewController(model);
  
 	/**
-	 * Costruttore che salva il primo stato del modello, ovvero quando è vuoto.
+	 * Constructor which save the first phase of the model, when it is empty.
 	 */
 	public Controller() {
 		vcontr.createMemento();
@@ -170,7 +172,7 @@ public class Controller implements IController {
 	}
 	
 	/**
-	 * Richiamata il metodo {@link IViewController#undoRedo(IView)} per ogni view attaccata al controller.
+	 * It calls the method {@link IViewController#undoRedo(IView)} for every view linked to the controller.
 	 */
 	private void undoRedo() {
 		for (final IView v : view) {
@@ -179,9 +181,9 @@ public class Controller implements IController {
 	}
 	
 	/**
-	 * Notifica tutte le view che è avvenuto un qualche tipo di errore.
+	 * Send notice to all views that a certain type of error has occurred.
 	 * 
-	 * @param e Eccezione avvenuta in seguito ad un errore della quale si mostrerà la descrizione alla view.
+	 * @param and Exception occurred after an error, whose description will be shown in the view.
 	 */
 	private void displayError(final Throwable e) {
 		for (final IView v : view) {

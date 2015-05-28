@@ -9,7 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 /**
- * Abstract Form contenente un tasto ok e cancel.
+ * Abstract Dialog that contains ok and cancel buttons.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -29,7 +29,7 @@ public abstract class AbstractForm extends JDialog {
 	
 	/**
 	 * 
-	 * @param v Frame principale.
+	 * @param v the Frame from which the dialog is displayed.
 	 */
 	protected AbstractForm(final Frame v) {
 		super(v);
@@ -52,16 +52,18 @@ public abstract class AbstractForm extends JDialog {
 	}
 	
 	/**
-	 * Metodo che informa se è stato premuto il tasto ok o meno.
+	 * Method to inform if ok button was pressed or not.
 	 * 
-	 * @return true se è stato premuto ok, altrimenti false.
+	 * @return true if ok button was pressed, otherwise false.
 	 */
 	public boolean isOk() {
 		return okState;
 	}
 	
 	/**
-	 * Aggiunge al metodo standard la collocazione del form al centro del form mainFrame.
+	 * Aggiunge al metodo standard la collocazione del dialog al centro del form mainFrame.
+	 * It is an extension of the standard method {@link JDialog#setVisible(boolean)} to set the location of this JDialog at the
+	 * center of the Frame from which the dialog is displayed.
 	 */
 	@Override
 	public void setVisible(final boolean b) {

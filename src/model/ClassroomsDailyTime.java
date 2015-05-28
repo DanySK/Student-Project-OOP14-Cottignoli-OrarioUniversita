@@ -6,9 +6,13 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import model.interfaces.IClassroomsDailyTime;
+import model.interfaces.IDailyTime;
+import model.interfaces.ISubject;
+
 /**
- * Implementazione dell'interfaccia {@link IClassroomsDailyTime} tramite l'utilizzo di una Map che come chiave ha i valori di 
- * {@link Classrooms#values()} ed associato ad ognuna un {@link IDailyTime}.
+ * Implementation of the interface {@link IClassroomsDailyTime} through the usage of a Map that as a key 
+ * shows the values of {@link Classrooms#values()} and to everyone it is associated a {@link IDailyTime}.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -23,7 +27,7 @@ public class ClassroomsDailyTime implements IClassroomsDailyTime {
 	private final Map<Classrooms, IDailyTime> m = new HashMap<>();
 	
 	/**
-	 * Crea un nuovo orario giornaliero con tutte le ore libere per ogni aula.
+	 * It creates a new daily timetable with all available hours in every classroom.
 	 */
 	public ClassroomsDailyTime() {
 		for (final Classrooms c : Classrooms.values()) {
@@ -32,10 +36,10 @@ public class ClassroomsDailyTime implements IClassroomsDailyTime {
 	}
 	
 	/**
-	 * Crea un nuovo orario giornaliero per ogni aula copiando quello passato come parametro.
+	 * It creates a new daily timetable for every classroom by copying the old one using it as a parameter.
 	 * 
-	 * @param cdt Orario giornaliero di tutte le aulee da copiare.
-	 * @throws IllegalArgumentException se il parametro cdt è null.
+	 * @param cdt Daily timetable of every classroom to be copied .
+	 * @throws IllegalArgumentException if parameter cdt is null.
 	 */
 	public ClassroomsDailyTime(final IClassroomsDailyTime cdt) {
 		if (cdt == null) {
@@ -140,10 +144,11 @@ public class ClassroomsDailyTime implements IClassroomsDailyTime {
 	}
 
 	/**
-	 * Metodo per controllare che l'aula non sia null.
+	 * Method which is necessary to control that the classroom is not null.
 	 * 
-	 * @param room Aula da controllare.
-	 * @throws IllegalArgumentException se room è null.
+	 * @param room Classroom that has to be checked.
+	 * @throws IllegalArgumentException if room is null.
+
 	 */
 	private void checkRoom(final Classrooms room) {
 		if (room == null) {

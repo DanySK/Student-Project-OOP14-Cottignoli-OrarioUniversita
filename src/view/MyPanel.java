@@ -18,7 +18,7 @@ import javax.swing.table.TableModel;
 import model.SubjectType;
 
 /**
- * Classe che definisce il pannello principale della mia {@link View}.
+ * Class that define main panel of class {@link View}.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -31,12 +31,13 @@ public class MyPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Panel creation.
 	 * 
-	 * @param tm Modello da collegare alla {@link JTable} presente nel pannello.
-	 * @param bAdd Bottone utilizzato per aggiungere materie nell'orario.
-	 * @param bRemove Bottone utilizzato per rimuovere materie nell'orario.
-	 * @param r1 Utilizzato per indicare il primo semestre.
-	 * @param r2 Utilizzato per indicare il secondo semestre.
+	 * @param tm Model of {@link JTable} in the panel.
+	 * @param bAdd Button used to add a subject to timetable.
+	 * @param bRemove Button used to remove subject from timetable.
+	 * @param r1 RadioButton used to select first semester.
+	 * @param r2 RadioButton used to select second semester.
 	 */
 	public MyPanel(final TableModel tm, final JButton bAdd, final JButton bRemove, final JRadioButton r1, final JRadioButton r2) {
 		final JTable table = new JTable(tm);
@@ -85,7 +86,7 @@ public class MyPanel extends JPanel {
 			rect.setBackground(st.getColor());
 			colorPanel.add(rect, c);
 			c.gridx++;
-			colorPanel.add(new JLabel(st.getDescription()), c);
+			colorPanel.add(new JLabel(st.getDescription() + " (" + st.toString() + ")"), c);
 			c.gridy++;
 		}
 		eastPanel.add(colorPanel, cnst);

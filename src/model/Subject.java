@@ -1,6 +1,9 @@
 package model;
+
+import model.interfaces.ISubject;
+
 /**
- * Implementazione dell'interfaccia {@link ISubject}.
+ * Implementation of the interface {@link ISubject}.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -17,12 +20,12 @@ public class Subject implements ISubject {
 	private final SubjectType subType;   
 	
 	/**
-	 * Crea una materia con i parametri passati.
+	 * It creates a course with passed parameters.
 	 * 
-	 * @param sub Nome della materia.
-	 * @param teach Nome del professore che tiene questa lezione.
-	 * @param type Tipologia di materia.
-	 * @throws IllegalArgumentException se uno o più parametri sono null.
+	 * @param sub Name of the course.
+	 * @param teach Name of the teacher that holds the course.
+	 * @param type Type of the course.
+	 * @throws IllegalArgumentException if one or more than one parameters are null.
 	 */
 	public Subject(final String sub, final String teach, final SubjectType type) {
 		if (sub == null || teach == null || type == null) {

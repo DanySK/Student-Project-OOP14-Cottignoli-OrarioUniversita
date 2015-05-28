@@ -8,11 +8,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import controller.IController;
+import controller.interfaces.IController;
 
 /**
- * Menù per la gestione delle operazioni di: creazione di un nuovo modello, salvataggio, caricamento,
- * import ed export della lista delle materie e chiusura del programma.
+ * Menu to manage these operation: Model creation, saving, loading, import/export of subjects list and closing the program.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -37,9 +36,9 @@ public class MenuFile extends JMenu {
 	private final JFileChooser chooser = new JFileChooser();
 	
 	/**
-	 * Creazione del menù.
+	 * Menu creation.
 	 * 
-	 * @param f Frame sul quale verrà inserito il menù.
+	 * @param f The Frame from which the menù is displayed.
 	 */
 	public MenuFile(final Frame f) {
 		super("File");
@@ -54,17 +53,16 @@ public class MenuFile extends JMenu {
 	}
 	
 	/**
-	 * Metodo per associare un controller a questo menù, in modo tale che gli handlers dei
-	 * componenti funzionino sullo stesso controller che gestiste il Frame su cui è inserito il menù. 
+	 * Method to attach a controller at this menu.
 	 * 
-	 * @param ctrl Controller su cui poter effettuare le operazioni che mette a disposizione questo menù.
+	 * @param ctrl Controller on which performing the operations that provides this menu.
 	 */
 	public void setController(final IController ctrl) {
 		controller = ctrl;
 	}
 	
 	/**
-	 * Metodo che associa ad ogni {@link JMenuItem} il proprio listener in base all'operazione che deve svolgere.
+	 * Method that associates to each {@link JMenuItem} a listener based on what operation it must perform.
 	 */
 	private void setHandlers() {
 		itemNew.addActionListener(e -> {

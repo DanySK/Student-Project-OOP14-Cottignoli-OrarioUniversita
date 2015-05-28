@@ -11,10 +11,10 @@ import java.util.NoSuchElementException;
 import org.junit.Test;
 
 import controller.Caretaker;
-import controller.ICaretaker;
+import controller.interfaces.ICaretaker;
 
 /**
- * Classe per testare il corretto funzionamento della classe {@link Caretaker}.
+ * Class for testing the correct working of the class {@link Caretaker}.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -22,7 +22,8 @@ import controller.ICaretaker;
 public class TestCaretaker {
 
 	/**
-	 * Test per controllare che la classe Caretaker segui il funzionamento indicato nei metodi dell'interfaccia {@link ICaretaker}.
+	 * Necessary test to control that the class Caretaker follows the correct working 
+	 * specified in the methods of the interface {@link ICaretaker}.
 	 */
 	@Test
 	public void test() {

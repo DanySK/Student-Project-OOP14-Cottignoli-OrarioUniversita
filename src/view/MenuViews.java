@@ -10,11 +10,12 @@ import javax.swing.JRadioButtonMenuItem;
 import model.Classrooms;
 import model.Days;
 import model.SubjectType;
-import controller.IController;
+import view.interfaces.IView;
 import controller.ViewsType;
+import controller.interfaces.IController;
 
 /**
- * Menu per la gestione del tipo di vista dell'orario che si vuole avere {@link ViewsType}.
+ * Menu to manage the view type of the model that you want to show {@link ViewsType}.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -34,10 +35,10 @@ public class MenuViews extends JMenu {
 	private IController controller;
 	
 	/**
-	 * Creazione del menù.
+	 * Menu creation.
 	 * 
-	 * @param v View su cui verrà messo il menù.
-	 * @param vType Form contenente una lista di oggetti, utilizzabile quando si richiede su quale oggetto voler focalizzare il tipo di vista.
+	 * @param v The view from which the menù is displayed.
+	 * @param vType Dialog containing a list of objects used when you require on which object you want to focus the view. 
 	 */
 	public MenuViews(final IView v, final ListObjectForm vType) {
 		super("Views");
@@ -57,18 +58,17 @@ public class MenuViews extends JMenu {
 	}
 	
 	/**
-	 * Metodo per associare un controller a questo menù, in modo tale che gli handlers dei
-	 * componenti funzionino sullo stesso controller che gestiste il Frame su cui è inserito il menù. 
+	 * Method to attach a controller at this menu.
 	 * 
-	 * @param ctrl Controller su cui poter effettuare le operazioni che mette a disposizione questo menù.
+	 * @param ctrl Controller on which performing the operations that provides this menu.
 	 */
 	public void setController(final IController ctrl) {
 		controller = ctrl;
 	}
 	
 	/**
-	 * Metodo che associa all'Array di {@link JRadioButtonMenuItem} un listener comune che in base alla String restituita dal metodo 
-	 * {@link JRadioButtonMenuItem#getActionCommand()} effettua compiti differenti.
+	 * Method that associates to an Arrays of {@link JRadioButtonMenuItem} a shared listener that will do something depending on the  
+	 * String returned by the method {@link JRadioButtonMenuItem#getActionCommand()}.
 	 */
 	private void setHandlers() {
 		final ActionListener itemsViewListener = new ActionListener() {

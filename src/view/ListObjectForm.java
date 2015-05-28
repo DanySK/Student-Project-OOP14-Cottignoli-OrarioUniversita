@@ -10,8 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * Form in cui è presente un solo JComboBox, utilizzabile sia nella rimozione di una materia dalla lista
- * delle materie disponibili sia per la gestione delle viste.
+ * Dialog where there is only one JComboBox, used to remove subjects from available subject list or for the management of view types.
  * 
  * @author Lorenzo Cottignoli
  *
@@ -29,7 +28,7 @@ public class ListObjectForm extends AbstractForm {
 	
 	/**
 	 * 
-	 * @param v Frame principale.
+	 * @param v The Frame from which the dialog is displayed.
 	 */
 	public ListObjectForm(final Frame v) {
 		super(v);
@@ -40,10 +39,10 @@ public class ListObjectForm extends AbstractForm {
 	}
 	
 	/**
-	 * Metodo per settare la lista di oggetti selezionabili e un nome rappresentativo di questi oggetti.
+	 * Method to set a list of selectable objects and a name to represent these objects.
 	 * 
-	 * @param s Lista degli oggetti da aggiiungere al JComboBox.
-	 * @param objectName Nome degli oggetti.
+	 * @param s List of objects to add in JComboBox.
+	 * @param objectName Object's name.
 	 */
 	public void setList(final Set<? extends Object> s, final String objectName) {
 		sub.removeAllItems();
@@ -56,9 +55,9 @@ public class ListObjectForm extends AbstractForm {
 	}
 	
 	/**
-	 * Metodo per recuperare l'oggetto selezionato.
+	 * Method to retrieve the selected object.
 	 * 
-	 * @return Oggetto selezionato.
+	 * @return Selected object.
 	 */
 	public Object getSelectedObject() {
 		return sub.getSelectedItem();
